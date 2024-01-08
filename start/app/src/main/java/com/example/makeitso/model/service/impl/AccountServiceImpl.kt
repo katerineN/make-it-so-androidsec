@@ -16,11 +16,13 @@ limitations under the License.
 
 package com.example.makeitso.model.service.impl
 
+import android.net.Uri
 import com.example.makeitso.model.User
 import com.example.makeitso.model.service.AccountService
 import com.example.makeitso.model.service.trace
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import javax.inject.Inject
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -77,7 +79,30 @@ class AccountServiceImpl @Inject constructor(private val auth: FirebaseAuth) : A
     createAnonymousAccount()
   }
 
+  override suspend fun getName():String {
+    var name = auth.currentUser!!.displayName
+    if (name == null) name = "Name don't exist"
+    return name
+  }
+
   companion object {
     private const val LINK_ACCOUNT_TRACE = "linkAccount"
+  }
+  override fun getPhotoUrl(): Uri? {
+    return auth.currentUser!!.photoUrl
+  }
+
+  override suspend fun getProviderId():String {
+    var provider = ""
+    for (profile in auth.currentUser!!.providerData) {
+      provider = profile.providerId
+    }
+    if (provider=="password"){
+      provider = "email"
+    }
+    if (provider=="google.com"){
+      provider = "google"
+    }
+    return provider
   }
 }

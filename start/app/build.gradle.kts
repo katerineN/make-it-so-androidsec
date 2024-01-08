@@ -77,6 +77,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
     implementation("com.google.accompanist:accompanist-permissions:0.30.1")
     implementation("com.google.dagger:hilt-android:2.47")
+    implementation("com.google.firebase:firebase-inappmessaging-ktx:20.4.0")
     ksp("com.google.dagger:hilt-compiler:2.47")
 
     //Firebase
@@ -88,6 +89,11 @@ dependencies {
     implementation("com.google.firebase:firebase-perf")
     implementation("com.google.firebase:firebase-config")
     implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.coil-kt:coil:2.5.0")
+
+
 
     //Test
     testImplementation("junit:junit:4.+")

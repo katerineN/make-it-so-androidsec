@@ -45,6 +45,8 @@ fun SettingsScreen(
   SettingsScreenContent(
     uiState = uiState,
     onLoginClick = { viewModel.onLoginClick(openScreen) },
+    onProfileClick = { viewModel.onProfileClick(openScreen) },
+    onLoginClickGoogle = {viewModel.onLoginClickGoogle(openScreen)},
     onSignUpClick = { viewModel.onSignUpClick(openScreen) },
     onSignOutClick = { viewModel.onSignOutClick(restartApp) },
     onDeleteMyAccountClick = { viewModel.onDeleteMyAccountClick(restartApp) }
@@ -57,6 +59,8 @@ fun SettingsScreenContent(
   modifier: Modifier = Modifier,
   uiState: SettingsUiState,
   onLoginClick: () -> Unit,
+  onProfileClick: () -> Unit,
+  onLoginClickGoogle: () -> Unit,
   onSignUpClick: () -> Unit,
   onSignOutClick: () -> Unit,
   onDeleteMyAccountClick: () -> Unit
@@ -77,10 +81,17 @@ fun SettingsScreenContent(
         onLoginClick()
       }
 
+      RegularCardEditor(AppText.google_in, AppIcon.ic_sign_in, "", Modifier.card()) {
+        onLoginClick()
+      }
+
       RegularCardEditor(AppText.create_account, AppIcon.ic_create_account, "", Modifier.card()) {
         onSignUpClick()
       }
     } else {
+      RegularCardEditor(AppText.profile_name, AppIcon.ic_sign_in, "", Modifier.card()) {
+        onProfileClick()
+      }
       SignOutCard { onSignOutClick() }
       DeleteMyAccountCard { onDeleteMyAccountClick() }
     }
@@ -152,6 +163,8 @@ fun SettingsScreenPreview() {
     SettingsScreenContent(
       uiState = uiState,
       onLoginClick = { },
+      onProfileClick = { },
+      onLoginClickGoogle = { },
       onSignUpClick = { },
       onSignOutClick = { },
       onDeleteMyAccountClick = { }
